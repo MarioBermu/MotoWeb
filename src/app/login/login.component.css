@@ -1,0 +1,73 @@
+/* centrar horizontalmente */
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin-top: 150px;
+}
+.form-container{
+  /* centrado verticalmente */
+  width: 500px;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+/* ordenar el login */
+.form{
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+}
+
+input{
+  padding: 15px;
+  border-radius: 5px;
+  border: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  text-align: center;
+}
+
+button{
+  background-color: #513A2A;
+  color: blanchedalmond;
+  /* font-weight: bold; */
+  cursor: pointer;
+  text-align: center; /* Centra el texto horizontalmente dentro del botón */
+  padding: 20px; /* Agrega algo de relleno para que el texto no esté tan cerca del borde */
+  border-radius: 50px; /* Agrega esquinas redondeadas al botón */
+  border: unset; /* Elimina el borde del botón */
+  display:flex; /* Establece la visualización en línea-flex */
+  justify-content: center;
+  align-items: center;
+  width: 80%; /* Establece el ancho del botón */
+}
+
+.color{
+  color: #513A2A;
+}
+
+.error{
+  color: #e95959;
+
+}
+.escondido{
+  display: none;
+}
+
+/* para hacer el parrafo que va justo despues del formulario */
+.form+p, form p{
+  text-align: center;
+}
+
+.sr-only{
+  position: absolute;
+  left:-10000px;
+  top:auto;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}

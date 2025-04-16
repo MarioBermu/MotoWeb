@@ -1,0 +1,22 @@
+.comment{
+  background-color: white;
+  color: black;
+
+
+  padding: 0.5rem;
+
+}
+
+
+.card-body{
+  width: 500px;
+  height: 500px;
+  overflow: auto;
+  border: 1px solid black;
+  border-radius: 0.25rem;
+  background-color: #513A2A;
+}
+
+h1{
+  text-align: center;
+}

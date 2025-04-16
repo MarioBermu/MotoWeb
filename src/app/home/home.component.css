@@ -1,0 +1,85 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilo general del cuerpo */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: #fff;
+}
+
+
+/* Sección del héroe */
+.hero {
+
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+  padding: 0 20px;
+}
+
+
+header {
+  background: url('../../assets/img/hero-bg.jpg') no-repeat center center/cover;
+  width: 100%;
+  position: relative;
+}
+
+
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+}
+
+/* Secciones generales */
+.section {
+  padding: 60px 40px;
+  text-align: center;
+}
+
+.section h2 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+/* Galería */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.gallery-item {
+  flex: 1 1 calc(33% - 40px);
+  max-width: calc(33% - 40px);
+}
+
+.gallery-item img {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+}
+
+/* Pie de página */
+footer {
+  background: #f8f8f8;
+  text-align: center;
+  padding: 20px 0;
+  border-top: 1px solid #eaeaea;
+  font-size: 0.9rem;
+}

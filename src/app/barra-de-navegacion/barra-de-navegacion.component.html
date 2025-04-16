@@ -1,0 +1,49 @@
+
+
+<div class="container-fluid barranav">
+<nav class="navbar navbar-expand-xxl">
+  <div class="container-fluid">
+    <a href="/home" class="navbar-brand">MOTOWEB</a>
+    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#MenuNavegacion">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="MenuNavegacion" class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-3">
+        <li class="nav-item">
+          <a href="/home" class="nav-item" class="nav-link">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a href="/pageNosotros" routerLinkActive="active-link" class="nav-link">NosotrEs</a>
+        </li>
+        <li class="nav-item">
+          <a href="/preguntas" class="nav-link">Preguntas frecuentes</a>
+        </li>
+        <li class="nav-item">
+          <a href="/mapa" routerLinkActive="active-link" class="nav-link">Rutas</a>
+        </li>
+
+
+        <div *ngIf="!authService.isAuthenticated()">
+            <li class="nav-item derecha1">
+              <a href="/login" routerLinkActive="active-link" class="nav-link">Iniciar Sesión</a>
+            </li>
+            <li class="nav-item derecha2">
+                <a href="/register" routerLinkActive="active-link" class="nav-link">Registro</a>
+            </li>
+            </div>
+            <div *ngIf="authService.isAuthenticated()" class="greeting derecha2">Hola,  {{userName}} !
+            <button (click) ="onLogout()">Logout</button>
+          </div>
+
+
+      </ul>
+  </div>
+
+  </div>
+
+</nav>
+
+
+</div>
+
+

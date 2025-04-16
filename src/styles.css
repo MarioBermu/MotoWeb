@@ -1,0 +1,153 @@
+
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:Georgia;
+}
+
+/* header{
+  <h1 style="text-align: center"</h1>
+} */
+ul.navega li {
+  display: inline;
+}
+
+/* header */
+h1 {
+  font-family:Georgia;
+  }
+  a[target="inicio"]{
+    /* background-color: #6CBA; */
+    text-align:match-parent;
+    color: blanchedalmond;
+    /* text-decoration:underline; */
+    /* subrayar texto (color de fondo del texto) #6CBA, #5c6bc0; #8d6e63;#FDD83*/
+  }
+  a[target="registro"]{
+    /* background-color: #6CBA; */
+    text-align:match-parent;
+    color:blanchedalmond;
+
+
+    /* subrayar texto (color de fondo del texto) #6CBA, #5c6bc0; #8d6e63;#FDD83*/
+  }
+
+/* body */
+body{
+  background-color: #6e6e6e;
+  color: blanchedalmond;
+  /* color texto */
+}
+
+input[type=text] {
+  background-color: blanchedalmond;
+
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding-left: 40px;
+}
+
+a[target="_blank"]{
+  background-color:#6CBA;
+  /* subrayar texto (color de fondo del texto) #6CBA, #5c6bc0; #8d6e63;#FDD83*/
+}
+
+section{
+  font-size: 2em;
+}
+
+#autores {
+  /* #nombre del titulo de la seccion (section) */
+  font-size:smaller;
+}
+
+/* menu */
+.dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+a[target="menu"]{
+  align-tracks: center;
+  background-color:#8d6e63;
+  /* subrayar texto (color de fondo del texto) #6CBA, #5c6bc0; #8d6e63;#FDD83*/
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  width: 300%; /*tamaño barra*/
+  /* Esto asegura que tu contenido desplegable aparezca debajo del botón y que tenga el mismo ancho que este. */
+  overflow: auto; /*usuarios puedan desplazarse hacia abajo en el menú */
+  box-shadow: 100px 100px 100px 100px rgba (0, 0, 0, 0.2) ; /*valores necesarios para que el contenido desplegable sobresalga sobre el fondo de tu página*/
+}
+
+/* :hover te permitirá establecer estado especial para tu elemento, aqui aparecerá cuando el usuario se desplace sobre el botón. */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content a {
+  display: block;
+  color: blanchedalmond;
+  padding: 5px;
+  text-decoration:none;
+}
+
+.dropdown-content a:hover {
+  color: #8d6e63;
+  background-color: blanchedalmond;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 3px dotted #FFF;
+  border-style: solid solid dotted dotted;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  animation: rotation 2s linear infinite;
+}
+.loader::after {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 3px dotted blanchedalmond;
+  border-style: solid solid dotted;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  animation: rotationBack 1s linear infinite;
+  transform-origin: center center;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotationBack {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+
+
+

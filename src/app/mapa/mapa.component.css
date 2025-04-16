@@ -1,0 +1,14 @@
+/* Estilos básicos para que el mapa se muestre correctamente */
+#mapId {
+  width: 100%;
+  height: 500px;
+  border-radius: 8px;
+  /* Puedes añadir más estilos o sombras si deseas */
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 24px;
+
+}
