@@ -143,23 +143,6 @@ export class MapaComponent implements OnInit, OnDestroy {
     this.map.fitBounds(this.currentPolyline.getBounds());
   }
 
-  getPreviewPoints(route: Route): string {
-    const coords = route.coordinates;
-    if (!coords.length) return '';
-    let minLat = Infinity, maxLat = -Infinity, minLng = Infinity, maxLng = -Infinity;
-    coords.forEach(([lat, lng]) => {
-      minLat = Math.min(minLat, lat);
-      maxLat = Math.max(maxLat, lat);
-      minLng = Math.min(minLng, lng);
-      maxLng = Math.max(maxLng, lng);
-    });
-    const latRange = maxLat - minLat || 1;
-    const lngRange = maxLng - minLng || 1;
-    const W = 100, H = 50;
-    return coords.map(([lat, lng]) => {
-      const x = ((lng - minLng) / lngRange) * W;
-      const y = H - ((lat - minLat) / latRange) * H;
-      return `${x},${y}`;
-    }).join(' ');
-  }
+
+
 }
