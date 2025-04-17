@@ -7,6 +7,9 @@ import { AppRoutingModule } from "./app.routes";
 import { CartComponent } from "./cart/cart.component";
 import { FormsModule } from '@angular/forms';
 
+import { ReactiveFormsModule } from '@angular/forms';  // <-- añádelo
+
+import { RouteBuilderComponent } from './route-builder/route-builder.component';
 
 import { MapaComponent } from './mapa/mapa.component';
 
@@ -16,6 +19,8 @@ import { MapaComponent } from './mapa/mapa.component';
 
   ],
   imports: [
+    BrowserModule,
+    ReactiveFormsModule,
     CommonModule,
     FormsModule,
     BrowserModule,

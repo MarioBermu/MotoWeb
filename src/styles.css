@@ -22,14 +22,14 @@ h1 {
   a[target="inicio"]{
     /* background-color: #6CBA; */
     text-align:match-parent;
-    color: blanchedalmond;
+    color: rgb(0, 0, 0);
     /* text-decoration:underline; */
     /* subrayar texto (color de fondo del texto) #6CBA, #5c6bc0; #8d6e63;#FDD83*/
   }
   a[target="registro"]{
     /* background-color: #6CBA; */
     text-align:match-parent;
-    color:blanchedalmond;
+    color:rgb(0, 0, 0);
 
 
     /* subrayar texto (color de fondo del texto) #6CBA, #5c6bc0; #8d6e63;#FDD83*/
@@ -37,8 +37,8 @@ h1 {
 
 /* body */
 body{
-  background-color: #6e6e6e;
-  color: blanchedalmond;
+
+  color: rgb(0, 0, 0);
   /* color texto */
 }
 

@@ -1,0 +1,15 @@
+<div class="builder-container">
+  <form [formGroup]="routeForm" (ngSubmit)="onSave()">
+    <label>
+      Nombre de la ruta:
+      <input formControlName="name" placeholder="Mi ruta molona" />
+    </label>
+    <button type="submit" [disabled]="routeForm.invalid || coordinates.length === 0">
+      Guardar ruta
+    </button>
+  </form>
+
+  <small>Usa las herramientas del mapa para dibujar marcadores o líneas.</small>
+
+  <div id="builderMapId"></div>
+</div>

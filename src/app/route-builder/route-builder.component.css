@@ -1,0 +1,28 @@
+.builder-container {
+
+  margin: 20px auto;
+  text-align: center;
+}
+
+.builder-container form {
+  margin-bottom: 10px;
+}
+
+.builder-container input {
+  padding: 6px;
+  width: 100%;
+}
+
+.builder-container button {
+  margin-left: 10px;
+  padding: 6px 12px;
+}
+
+#builderMapId {
+  margin: 0 auto;
+  height: 750px;
+  width: 80%;
+  border-radius: 8px;
+  border: 1px solid #000000;
+  margin-top: 10px;
+}
