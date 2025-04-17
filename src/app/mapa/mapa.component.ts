@@ -17,6 +17,8 @@ export class MapaComponent implements OnInit {
   private map: any;
   private currentPolyline: any;
 
+
+
   // Agrega estas propiedades para el selector de rutas:
   routes: Route[] = [];
   selectedRouteId: string = '';  // Esto se enlaza en el select con ngModel
@@ -62,23 +64,23 @@ export class MapaComponent implements OnInit {
     );
   }
 
-  async onRouteSelected(): Promise<void> {
-    // Evita que se ejecute si no se ha seleccionado ninguna ruta
-    if (!this.selectedRouteId) return;
+  selectRoute(routeId: string) {
+    this.selectedRouteId = routeId;
+    this.onRouteSelected();  // reutilizamos el método que ya tenía lógica de dibujo
+  }
 
+  async onRouteSelected(): Promise<void> {
+    if (!this.selectedRouteId) return;
     const selected = this.routes.find(r => r._id === this.selectedRouteId);
     if (!selected) return;
-
     const L = await import('leaflet');
+    if (this.currentPolyline) this.map.removeLayer(this.currentPolyline);
 
-    // Eliminar la polilínea actual si existe
-    if (this.currentPolyline) {
-      this.map.removeLayer(this.currentPolyline);
-    }
-
-    // Conversión de las coordenadas a LatLngTuple
-    const latlngs: L.LatLngTuple[] = selected.coordinates.map(coord => [coord[0], coord[1]]);
-    this.currentPolyline = L.polyline(latlngs, { color: 'blue' }).addTo(this.map);
+    const latlngs: L.LatLngTuple[] = selected.coordinates.map(c => [c[0], c[1]] as L.LatLngTuple);
+    this.currentPolyline = L.polyline(latlngs, { color: 'blue', weight: 4 }).addTo(this.map);
     this.map.fitBounds(this.currentPolyline.getBounds());
   }
+
+
+
 }

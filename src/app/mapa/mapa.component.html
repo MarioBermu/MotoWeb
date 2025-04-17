@@ -1,14 +1,13 @@
-<h1>Mapa</h1>
+<div id="mapId"></div>
 
-<div class="route-selector">
-  <label for="routeSelect">Selecciona una ruta:</label>
-  <select id="routeSelect" [(ngModel)]="selectedRouteId" (change)="onRouteSelected()">
-    <option value="" disabled>-- Elige una ruta --</option>
-    <option *ngFor="let route of routes" [value]="route._id">{{ route.name }}</option>
-  </select>
+<div class="routes-list">
+  <div
+    class="route-card"
+    *ngFor="let route of routes"
+    [class.selected]="route._id === selectedRouteId"
+    (click)="selectRoute(route._id ?? '')"
+  >
+    <h4>{{ route.name }}</h4>
+    <button type="button">Ver ruta</button>
+  </div>
 </div>
-
-<div id="mapId"></div>
-
-<div id="mapId"></div>
-
