@@ -1,36 +1,40 @@
+/* Estilos básicos para que el mapa se muestre correctamente */
 #mapId {
   width: 100%;
-  height: 500px;
+  height: 750px;
   border-radius: 8px;
   margin-bottom: 20px;
 }
 
+/* Contenedor de las rutas */
 .routes-list {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
+  flex-direction: column;   /* apila verticalmente */
+  gap: 12px;                /* separación entre tarjetas */
+  align-items: center;      /* centra cada tarjeta */
   margin: 20px auto;
-  max-width: 1200px;
-
+  max-width: 400px;         /* ajusta al ancho que necesites */
 }
 
+
+
+/* Cada tarjeta de ruta */
 .route-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;  /* texto a la izquierda, svg a la derecha */
-  width: 100%;
+
+  width: 1200px; /* ajusta al ancho que necesites */
+  flex: 1 1 200px;
   background: #fff;
   border: 2px solid transparent;
   border-radius: 6px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   padding: 12px;
-  cursor: pointer;
+  text-align: center;
   transition: border-color 0.2s, transform 0.2s;
+  cursor: pointer;
 }
 
 .route-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   border-color: #4a90e2;
 }
 
@@ -38,18 +42,12 @@
   border-color: #357abd;
 }
 
-.route-info {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.route-info h4 {
-  margin: 0;
+.route-card h4 {
+  margin: 0 0 8px;
   font-size: 16px;
 }
 
-.route-info button {
+.route-card button {
   padding: 6px 12px;
   background: #4a90e2;
   border: none;
@@ -58,20 +56,6 @@
   cursor: pointer;
 }
 
-.route-info button:hover {
+.route-card button:hover {
   background: #357abd;
-}
-
-.route-preview {
-  flex-shrink: 0;
-  margin-left: 12px;
-  background: #f0f4f8;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.route-distance {
-  margin-left: 8px;
-  font-size: 14px;
-  color: #555;
 }
