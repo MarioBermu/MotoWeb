@@ -7,7 +7,22 @@
     [class.selected]="route._id === selectedRouteId"
     (click)="selectRoute(route._id ?? '')"
   >
-    <h4>{{ route.name }}</h4>
-    <button type="button">Ver ruta</button>
+    <div class="route-info">
+      <h4>{{ route.name }}</h4>
+      <span class="route-distance">{{ route.distance }} km</span>
+    </div>
+    <svg
+      class="route-preview"
+      [attr.viewBox]="'0 0 100 50'"
+      width="100"
+      height="50"
+    >
+      <polyline
+        [attr.points]="getPreviewPoints(route)"
+        fill="none"
+        stroke="#357abd"
+        stroke-width="2"
+      ></polyline>
+    </svg>
   </div>
 </div>

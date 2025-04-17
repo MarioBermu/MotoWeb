@@ -16,13 +16,13 @@ router.get('/', async (req, res) => {
 
 // POST: Crear una nueva ruta
 router.post('/', async (req, res) => {
-  const { name, coordinates } = req.body;
+  const { name, coordinates, distance } = req.body;
   try {
-    const newRoute = new Route({ name, coordinates });
+    const newRoute = new Route({ name, coordinates, distance });
     await newRoute.save();
     res.status(201).json({ msg: 'Ruta creada correctamente', route: newRoute });
   } catch (err) {
-    console.error('Error al crear ruta:', err);
+    console.error(err);
     res.status(500).json({ msg: 'Error al crear ruta' });
   }
 });

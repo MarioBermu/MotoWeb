@@ -20,7 +20,7 @@ export class RouteBuilderComponent implements OnInit {
   drawControl: any;
   drawnItems: any;
   routeForm: FormGroup;
-  coordinates: number[][] = [];
+  coordinates: [number, number][] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -32,13 +32,14 @@ export class RouteBuilderComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-
+    // Sólo corre en el navegador
     if (typeof window === 'undefined') {
       return;
     }
-    // Cargar Leaflet y Leaflet.Draw (ya incluidos en scripts/styles)
-    const L = await import('leaflet');
-    await import('leaflet-draw');
+
+    // Import dinámico de Leaflet y Leaflet‑Draw
+        const L = await import('leaflet');
+        await import('leaflet-draw');
 
     // Inicializar mapa
     this.map = L.map('builderMapId').setView([41.15, 1.28], 13);
@@ -46,7 +47,7 @@ export class RouteBuilderComponent implements OnInit {
       attribution: '© OpenStreetMap contributors'
     }).addTo(this.map);
 
-    // Grupo para capas dibujadas
+    // Grupo de capas dibujadas
     this.drawnItems = new L.FeatureGroup();
     this.map.addLayer(this.drawnItems);
 
@@ -64,11 +65,10 @@ export class RouteBuilderComponent implements OnInit {
     });
     this.map.addControl(this.drawControl);
 
-    // Escuchar evento de dibujo creado
+    // Evento al crear
     this.map.on(L.Draw.Event.CREATED, (e: any) => {
       const layer = e.layer;
       if (e.layerType === 'polyline') {
-        // Extraer todos los puntos de la línea
         this.coordinates = layer.getLatLngs().map((p: any) => [p.lat, p.lng]);
       } else if (e.layerType === 'marker') {
         const p = layer.getLatLng();
@@ -78,21 +78,47 @@ export class RouteBuilderComponent implements OnInit {
     });
   }
 
+  private haversine(a: [number, number], b: [number, number]): number {
+    const toRad = (x: number) => x * Math.PI / 180;
+    const [lat1, lon1] = a.map(toRad);
+    const [lat2, lon2] = b.map(toRad);
+    const dLat = lat2 - lat1;
+    const dLon = lon2 - lon1;
+    const R = 6371; // km
+    const h = Math.sin(dLat/2)**2
+            + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon/2)**2;
+    return 2 * R * Math.asin(Math.sqrt(h));
+  }
+
+  /** Suma distancias de la ruta */
+  private computeTotalDistance(coords: [number, number][]): number {
+    let total = 0;
+    for (let i = 1; i < coords.length; i++) {
+      total += this.haversine(coords[i-1], coords[i]);
+    }
+    return Math.round(total * 100) / 100; // 2 decimales
+  }
+
+
   onSave(): void {
-    if (this.routeForm.invalid || this.coordinates.length === 0) {
-      alert('Dale un nombre y dibuja al menos un punto o línea.');
+    if (this.routeForm.invalid || this.coordinates.length < 2) {
+      alert('Nombre requerido y al menos 2 puntos.');
       return;
     }
+    const distance = this.computeTotalDistance(this.coordinates);
     const route: Route = {
       name: this.routeForm.value.name,
-      coordinates: this.coordinates
+      coordinates: this.coordinates,
+      distance
     };
     this.routeService.createRoute(route).subscribe({
       next: () => {
+        alert(`Ruta guardada (${distance} km)`);
         alert('Ruta guardada correctamente');
         this.routeForm.reset();
         this.drawnItems.clearLayers();
         this.coordinates = [];
+
       },
       error: err => alert('Error al guardar ruta: ' + (err.error.msg || err.message))
     });

@@ -6,6 +6,7 @@ export interface Route {
   _id?: string;
   name: string;
   coordinates: number[][]; // Array de [lat, lng]
+  distance?: number; // Distancia en metros
 }
 
 @Injectable({

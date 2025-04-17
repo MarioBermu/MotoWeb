@@ -81,6 +81,35 @@ export class MapaComponent implements OnInit {
     this.map.fitBounds(this.currentPolyline.getBounds());
   }
 
+  /** Devuelve la lista de puntos escalados para el SVG de previsualización */
+getPreviewPoints(route: Route): string {
+  const coords = route.coordinates;
+  if (!coords.length) return '';
+
+  // 1. Calcula el bounding box
+  let minLat = Infinity, maxLat = -Infinity;
+  let minLng = Infinity, maxLng = -Infinity;
+  coords.forEach(([lat, lng]) => {
+    if (lat < minLat) minLat = lat;
+    if (lat > maxLat) maxLat = lat;
+    if (lng < minLng) minLng = lng;
+    if (lng > maxLng) maxLng = lng;
+  });
+
+  const latRange = maxLat - minLat || 1;
+  const lngRange = maxLng - minLng || 1;
+
+  // 2. Escala a un cuadro de 100×50
+  const W = 100, H = 50;
+  return coords.map(([lat, lng]) => {
+    const x = ((lng - minLng) / lngRange) * W;
+    // invertimos Y para que latitudes mayores queden arriba
+    const y = H - ((lat - minLat) / latRange) * H;
+    return `${x},${y}`;
+  }).join(' ');
+}
+
+
 
 
 }
