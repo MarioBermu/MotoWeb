@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RouteService, Route } from '../route.service';
+
+
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-route-builder',
@@ -31,52 +34,68 @@ export class RouteBuilderComponent implements OnInit {
     });
   }
 
-  async ngOnInit(): Promise<void> {
-    // Sólo corre en el navegador
-    if (typeof window === 'undefined') {
-      return;
-    }
+ // src/app/route-builder/route-builder.component.ts
 
-    // Import dinámico de Leaflet y Leaflet‑Draw
-        const L = await import('leaflet');
-        await import('leaflet-draw');
-
-    // Inicializar mapa
-    this.map = L.map('builderMapId').setView([41.15, 1.28], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(this.map);
-
-    // Grupo de capas dibujadas
-    this.drawnItems = new L.FeatureGroup();
-    this.map.addLayer(this.drawnItems);
-
-    // Herramientas de dibujo
-    this.drawControl = new L.Control.Draw({
-      edit: { featureGroup: this.drawnItems },
-      draw: {
-        polyline: {},
-        marker: {},
-        polygon: false,
-        circle: false,
-        rectangle: false,
-        circlemarker: false
-      }
-    });
-    this.map.addControl(this.drawControl);
-
-    // Evento al crear
-    this.map.on(L.Draw.Event.CREATED, (e: any) => {
-      const layer = e.layer;
-      if (e.layerType === 'polyline') {
-        this.coordinates = layer.getLatLngs().map((p: any) => [p.lat, p.lng]);
-      } else if (e.layerType === 'marker') {
-        const p = layer.getLatLng();
-        this.coordinates.push([p.lat, p.lng]);
-      }
-      this.drawnItems.addLayer(layer);
-    });
+ async ngOnInit(): Promise<void> {
+  // 1) Salimos si no hay window (SSR)
+  if (typeof window === 'undefined') {
+    return;
   }
+
+  // 2) Import dinámico de Leaflet y su plugin Draw
+  const L = (await import('leaflet')).default;    // <- Leaflet
+  await import('leaflet-draw');                    // <- el plugin se atacha a L.Control
+
+  // 3) Inicialización normal del mapa y del draw control
+  this.map = L.map('builderMapId').setView([41.15, 1.28], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(this.map);
+
+  this.drawnItems = new L.FeatureGroup();
+  this.map.addLayer(this.drawnItems);
+
+  this.drawControl = new L.Control.Draw({
+    edit:   { featureGroup: this.drawnItems },
+    draw: {
+      polyline:     {},
+      marker:       {},
+      polygon:      false,
+      circle:       false,
+      rectangle:    false,
+      circlemarker: false
+    }
+  });
+  this.map.addControl(this.drawControl);
+
+  this.map.on('draw:created', (e: any) => {
+     // Cada vez que termines de dibujar (línea o marcador) entra aquí
+     const layer = e.layer;      // la capa recién dibujada
+     const type  = e.layerType;  // 'polyline' o 'marker'
+
+     if (type === 'polyline') {
+       // Para una línea, getLatLngs() devuelve un array de LatLng
+       const latlngs: L.LatLng[] = layer.getLatLngs();
+       // Mapea a [number, number] y sustituye el array completo
+       this.coordinates = latlngs.map(p => [p.lat, p.lng]);
+     }
+     else if (type === 'marker') {
+       // Para un marcador, getLatLng() devuelve un LatLng individual
+       const p: L.LatLng = layer.getLatLng();
+       // Añade ese punto al final del array
+       this.coordinates.push([p.lat, p.lng]);
+     }
+
+     // Añade la capa al grupo para que se quede visible
+     this.drawnItems.addLayer(layer);
+
+     // (Opcional) Si quieres ver el array por consola:
+     console.log('Puntos actuales de la ruta:', this.coordinates);
+    // … tu lógica para recoger puntos …
+  });
+}
+
+
 
   private haversine(a: [number, number], b: [number, number]): number {
     const toRad = (x: number) => x * Math.PI / 180;
