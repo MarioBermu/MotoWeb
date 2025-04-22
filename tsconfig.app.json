@@ -13,7 +13,13 @@
     "server.ts"
   ],
   "include": [
-    "src/**/*.d.ts"
+    "src/**/*.d.ts",
 
+  ],
+  "exclude": [
+    "**/*.spec.ts",   //  ➜ excluye todos los tests
+    "test.ts",
+    "**/*.d.ts"
   ]
+
 }

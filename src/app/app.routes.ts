@@ -18,6 +18,8 @@ import { BarraDeNavegacionComponent } from './barra-de-navegacion/barra-de-naveg
 import { PreguntasComponent } from './preguntas/preguntas.component'
 import { RouteBuilderComponent } from './route-builder/route-builder.component';
 
+
+
 export const routes: Routes = [
   { path: '', pathMatch:'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
