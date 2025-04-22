@@ -1,52 +1,121 @@
-
-
-<div class="container-fluid barranav">
-<nav class="navbar navbar-expand-xxl">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a href="/home" class="navbar-brand">MOTOWEB</a>
-    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#MenuNavegacion">
+    <a class="navbar-brand" routerLink="/home" data-bs-toggle="collapse" data-bs-target="#MenuNavegacion">MOTOWEB</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#MenuNavegacion"
+      aria-controls="MenuNavegacion"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div id="MenuNavegacion" class="collapse navbar-collapse">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-3">
-        <li class="nav-item">
-          <a href="/home" class="nav-item" class="nav-link">Inicio</a>
-        </li>
-        <li class="nav-item">
-          <a href="/pageNosotros" routerLinkActive="active-link" class="nav-link">NosotrEs</a>
-        </li>
-        <li class="nav-item">
-          <a href="/preguntas" class="nav-link">Preguntas frecuentes</a>
-        </li>
-        <li class="nav-item">
-          <a href="/mapa" routerLinkActive="active-link" class="nav-link">Rutas</a>
-        </li>
-        <li>
-          <a href="/route-builder" routerLinkActive="active-link" class="nav-link">Crear Ruta</a>
-        </li>
 
+    <div class="collapse navbar-collapse" id="MenuNavegacion">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/home"
+            routerLinkActive="active-link"
+            (click)="onNavLinkClick()"
 
-        <div *ngIf="!authService.isAuthenticated()">
-            <li class="nav-item derecha1">
-              <a href="/login" routerLinkActive="active-link" class="nav-link">Iniciar Sesión</a>
-            </li>
-            <li class="nav-item derecha2">
-                <a href="/register" routerLinkActive="active-link" class="nav-link">Registro</a>
-            </li>
-            </div>
-            <div *ngIf="authService.isAuthenticated()" class="greeting derecha2">Hola,  {{userName}} !
-            <button (click) ="onLogout()">Logout</button>
-          </div>
+          >
+            Inicio
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/pageNosotros"
+            routerLinkActive="active-link"
+            (click)="onNavLinkClick()"
 
+          >
+            Nosotros
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/preguntas"
+            routerLinkActive="active-link"
+            (click)="onNavLinkClick()"
 
+          >
+            Preguntas frecuentes
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+          class="nav-link"
+          routerLink="/mapa"
+          routerLinkActive="active-link"
+          (click)="onNavLinkClick()"
+        >
+          Rutas
+        </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/route-builder"
+            routerLinkActive="active-link"
+            (click)="onNavLinkClick()"
+
+          >
+            Crear Ruta
+          </a>
+        </li>
       </ul>
-  </div>
 
-  </div>
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <ng-container *ngIf="!authService.isAuthenticated()">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/login"
+              routerLinkActive="active-link"
+              (click)="onNavLinkClick()"
 
+            >
+              Iniciar Sesión
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/register"
+              routerLinkActive="active-link"
+              (click)="onNavLinkClick()"
+
+            >
+              Registro
+            </a>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="authService.isAuthenticated()">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="userMenu"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Hola, {{ userName }}!
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+              <li>
+                <button class="dropdown-item" (click)="onLogout(); onNavLinkClick()">Logout</button>
+              </li>
+            </ul>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
 </nav>
-
-
-</div>
-
-

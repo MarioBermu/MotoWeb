@@ -1,38 +1,16 @@
-
-
-.navbar{
-  background-color: #000000;
-  font-family:Georgia;
-  height: 80px;
+.navbar {
+  font-family: Georgia, serif;
 }
 
-.navbar-brand{
-  color : rgb(255, 235, 205);
-  font-size : 40px;
+.navbar-brand {
+  font-size: 40px;
 }
 
-
-
-.nav-link{
-  color : rgb(254, 255, 205);
-  font-size : 24px;
+.nav-link {
+  font-size: 18px;
 }
 
-
-
-
-.barranav{
-  background-color: #000000;
-
-}
-
-.derecha1{
-  position: absolute;
-  right: 160px;
-}
-
-.derecha2{
-  color: aliceblue;
-  position: absolute;
-  right: 60px;
+.active-link {
+  font-weight: bold;
+  text-decoration: underline;
 }
