@@ -22,7 +22,12 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "src/assets/leaflet/images",
+                "output": "assets/leaflet/images"
+              }
             ],
             "styles": [
               "node_modules/leaflet/dist/leaflet.css",
@@ -98,7 +103,12 @@
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/leaflet/dist/images",
+                "output": "/assets/leaflet/images"
+              }
             ],
             "styles": [
               "src/styles.css"
