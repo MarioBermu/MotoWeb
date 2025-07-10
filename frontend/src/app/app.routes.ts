@@ -17,6 +17,7 @@ import { HoraDelFinComponent } from './home/hora-del-fin/hora-del-fin.component'
 import { BarraDeNavegacionComponent } from './barra-de-navegacion/barra-de-navegacion.component';
 import { PreguntasComponent } from './preguntas/preguntas.component'
 import { RouteBuilderComponent } from './route-builder/route-builder.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 
 
@@ -24,7 +25,7 @@ export const routes: Routes = [
   { path: '', pathMatch:'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
 
-
+  {path: 'perfil', component: PerfilComponent},
   {path: 'route-builder', component: RouteBuilderComponent},
   { path: 'mapa', component: MapaComponent },
   { path: 'pageNosotros', component: PageNosotrosComponent},

@@ -1,16 +1,18 @@
+// auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
 
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { UserI } from '../models/user';
-import { JwtResponseI } from '../models/jwt-response';
-import { Observable, BehaviorSubject } from 'rxjs';
-
-import { Router } from '@angular/router';
-
-
+export interface LoginResponse {
+  token: string;
+  user: {
+    id: string;
+    username: string;
+    email: string;
+    profileImage: string;
+    role: string;
+  };
+}
 
 @Injectable({
   providedIn: 'root'
@@ -20,51 +22,34 @@ export class AuthService {
   private apiUrl = 'http://localhost:3000/api/auth';
   public loggedInUsers = new BehaviorSubject<string>('');
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {
     const savedName = this.getUserName();
-    if (savedName) this.loggedInUsers.next(savedName);  }
+    if (savedName) this.loggedInUsers.next(savedName);
+  }
 
-  login(email: string, password: string) {
-    this.http.post<any>(`${this.apiUrl}/login`, { email, password }).subscribe(
-      res => {
-        // ⚠️ Comprobamos que estamos en el navegador antes de usar localStorage
-        if (typeof window !== 'undefined') {
-          localStorage.setItem(this.tokenKey, res.token);
-          localStorage.setItem('user_email', res.email);
-          localStorage.setItem('user_name', res.username);
-        }
-
-        this.loggedInUsers.next(res.username);
-        this.router.navigate(['/']);
-      },
-      err => {
-        alert(err.error.msg || 'Error al iniciar sesión');
-      }
+  login(email: string, password: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(
+      `${this.apiUrl}/login`,
+      { email, password }
     );
   }
 
-  register(username: string, email: string, password: string) {
-    this.http.post<any>(`${this.apiUrl}/register`, { username, email, password }).subscribe(
-      res => {
-        alert(res?.msg || '¡Registro exitoso!');
-        this.router.navigate(['/login']);
-      },
-      err => {
-        console.error(err);
-        const errorMsg = err?.error?.msg || 'Error al registrarse';
-        alert(errorMsg);
-      }
-    );
-  }
+  // auth.service.ts
+register(username: string, email: string, password: string): Observable<any> {
+  return this.http.post<any>(`${this.apiUrl}/register`, { username, email, password });
+}
+
 
   logout(): void {
     if (typeof window !== 'undefined') {
       localStorage.removeItem(this.tokenKey);
       localStorage.removeItem('user_email');
       localStorage.removeItem('user_name');
+      localStorage.removeItem('profileImage');
+      localStorage.removeItem('userId');
+      localStorage.removeItem('userRole');
     }
     this.loggedInUsers.next('');
-    this.router.navigate(['/login']);
   }
 
   getToken(): string | null {
@@ -79,12 +64,12 @@ export class AuthService {
     return typeof window !== 'undefined' ? localStorage.getItem('user_email') : null;
   }
 
-  isLoggedIn(): boolean {
-    return !!this.getToken();
+  getUserRole(): string | null {
+    return typeof window !== 'undefined' ? localStorage.getItem('userRole') : null;
   }
+
+  /** Método que usas en tu navbar: */
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
-
-
 }

@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-hora-del-fin',
-  standalone: true,
-  imports: [CommonModule],
+  
   templateUrl: './hora-del-fin.component.html',
   styleUrl: './hora-del-fin.component.css'
 })

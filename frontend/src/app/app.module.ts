@@ -12,6 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';  // <-- añádelo
 import { RouteBuilderComponent } from './route-builder/route-builder.component';
 
 import { MapaComponent } from './mapa/mapa.component';
+import { PerfilComponent } from "./perfil/perfil.component";
+
 
 
 @NgModule({
@@ -19,6 +21,7 @@ import { MapaComponent } from './mapa/mapa.component';
 
   ],
   imports: [
+    PerfilComponent,
     BrowserModule,
     ReactiveFormsModule,
     CommonModule,
@@ -26,7 +29,7 @@ import { MapaComponent } from './mapa/mapa.component';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    CartComponent,
+
   ],
   providers: [],
   bootstrap: [],

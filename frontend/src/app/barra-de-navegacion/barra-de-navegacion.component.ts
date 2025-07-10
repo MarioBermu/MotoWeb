@@ -10,6 +10,7 @@ import { Component, AfterViewInit, Inject, PLATFORM_ID, OnInit } from '@angular/
 import { isPlatformBrowser } from '@angular/common';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
+import { ElementRef, ViewChild } from '@angular/core';
 
 
 
@@ -71,5 +72,16 @@ export class BarraDeNavegacionComponent implements OnInit {
   get userEmail(): string | null {
     return this.authService.getUserEmail();
   }
+
+
+  dropdownOpen = false;
+
+  toggleDropdown(event: MouseEvent): void {
+  event.preventDefault();
+  this.dropdownOpen = !this.dropdownOpen;
 }
 
+closeDropdown(): void {
+  this.dropdownOpen = false;
+}
+}

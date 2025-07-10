@@ -4,8 +4,7 @@ import { StoreService } from '../service/store.service';
 
 @Component({
   selector: 'app-cart',
-  standalone: true,
-  imports: [CommonModule],
+  
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })

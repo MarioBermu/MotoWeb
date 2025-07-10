@@ -1,0 +1,32 @@
+<div class="perfil-container">
+  <div class="perfil-card">
+    <img [src]="profileImageUrl" class="perfil-avatar" />
+
+    <h2>{{ userName }}</h2>
+    <p>{{ userEmail }}</p>
+
+<button *ngIf="authService.getUserRole()==='admin'" (click)="irADashboardAdmin()">
+  Panel de administración
+</button>
+
+    <!-- Botón para alternar modo edición -->
+    <button class="perfil-btn" (click)="onEditProfile()">
+      {{ isEditing ? 'Cancelar' : 'Editar perfil' }}
+    </button>
+
+    <!-- SOLO en modo edición se muestra el selector -->
+    <ng-container *ngIf="isEditing">
+      <h3 class="avatar-title">Seleccionar imagen de perfil</h3>
+      <div class="avatar-grid">
+        <img
+          *ngFor="let avatar of avatars"
+          [src]="avatar"
+          [class.selected]="avatar === selectedAvatar"
+          (click)="selectAvatar(avatar)"
+          class="avatar-option"
+        />
+      </div>
+      <button class="perfil-btn" (click)="saveAvatar()">Guardar</button>
+    </ng-container>
+  </div>
+</div>

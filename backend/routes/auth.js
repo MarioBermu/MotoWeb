@@ -29,7 +29,17 @@ router.post('/login', async (req, res) => {
   if (!isMatch) return res.status(400).json({ msg: 'Credenciales inválidas' });
 
   const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
-  res.json({ token, username: user.username, email: user.email });
+
+  res.json({
+    token,
+    user: {
+      id: user._id,
+      username: user.username,
+      email: user.email,
+      profileImage: user.profileImage || '',
+      role: user.role || 'basic'
+    }
+  });
 });
 
 module.exports = router;
