@@ -12,10 +12,10 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PreguntaComponent } from './home/test/pregunta/pregunta.component';
 import { WelcomeComponent } from './home/test/welcome/welcome.component';
-import { ForoComponent } from './home/foro/foro.component';
+import { ForoComponent } from './foro/foro.component';
 import { HoraDelFinComponent } from './home/hora-del-fin/hora-del-fin.component';
 import { BarraDeNavegacionComponent } from './barra-de-navegacion/barra-de-navegacion.component';
-import { PreguntasComponent } from './preguntas/preguntas.component'
+
 import { RouteBuilderComponent } from './route-builder/route-builder.component';
 import { PerfilComponent } from './perfil/perfil.component';
 
@@ -24,7 +24,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 export const routes: Routes = [
   { path: '', pathMatch:'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
-
+  {path: 'foro', component: ForoComponent},
   {path: 'perfil', component: PerfilComponent},
   {path: 'route-builder', component: RouteBuilderComponent},
   { path: 'mapa', component: MapaComponent },
@@ -33,7 +33,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'pregunta', component: PreguntaComponent},
   { path: 'welcome', component: WelcomeComponent},
-  { path: 'preguntas', component: PreguntasComponent}
+
 ];
 
 @NgModule({

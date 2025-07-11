@@ -1,7 +1,12 @@
-const Mensaje = require('./foro.controller');
-const routes = require('express').Router();
+// backend/foro/foro.routes.js
+const express = require('express');
+const MensajeController = require('./foro.controller');
+const router = express.Router();
 
-module.exports = (router) => {
-router.post('/foro', Mensaje.createMensaje);
-router.get('/foro', Mensaje.getMensajes);
-}
+// GET  /api/foro       → devolver todos los mensajes
+router.get('/', MensajeController.getMensajes);
+
+// POST /api/foro       → crear un nuevo mensaje
+router.post('/', MensajeController.createMensaje);
+
+module.exports = router;

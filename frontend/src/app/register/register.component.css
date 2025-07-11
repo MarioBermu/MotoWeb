@@ -1,73 +1,150 @@
-/* centrar horizontalmente */
-:host {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  margin-top: 150px;
-}
-.form-container{
-  /* centrado verticalmente */
-  width: 500px;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-
-}
-/* ordenar el login */
-.form{
-  display: flex;
-  flex-direction: column;
-  gap:10px;
+:root {
+  --color-bg: #f0f2f5;
+  --color-card: #ffffff;
+  --color-primary: #007bff;
+  --color-primary-dark: #0056b3;
+  --color-border: #adb5bd;       /* un gris más oscuro */
+  --color-text: #212529;         /* casi negro */
+  --color-muted: #495057;        /* gris oscuro para labels */
 }
 
-input{
-  padding: 15px;
-  border-radius: 5px;
-  border: unset;
+/* Fondo de la página */
+body {
+  background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
+}
+
+/* Contenedor y tarjeta */
+.form-container {
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 80%;
+  justify-content: center;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+}
+.form-container form {
+  background-color: var(--color-card);
+  padding: 2.5rem 2rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);  /* sombra un poco más intensa */
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Título */
+.form-container h2 {
+  margin: 0 0 1.5rem;
+  color: var(--color-text);
+  font-size: 1.8rem;
   text-align: center;
 }
 
-button{
-  background-color: #513A2A;
-  color: blanchedalmond;
-  cursor: pointer;
-  text-align: center; /* Centra el texto horizontalmente dentro del botón */
-  padding: 20px; /* Agrega algo de relleno para que el texto no esté tan cerca del borde */
-  border-radius: 50px; /* Agrega esquinas redondeadas al botón */
-  border: unset; /* Elimina el borde del botón */
-  display:flex; /* Establece la visualización en línea-flex */
-  justify-content: center;
-  align-items: center;
-  width: 80%; /* Establece el ancho del botón */
+/* Floating labels revisados */
+.input-group {
+  position: relative;
+  margin-bottom: 1.5rem;
 }
-
-.color{
-  color: #513A2A;
+.input-group input {
+  width: 100%;
+  padding: 1rem 0.75rem 0.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: #fafafa;                             /* ligeramente gris */
+  color: var(--color-text);
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
 }
-
-.error{
-  color: #e95959;
-
+.input-group input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background: #fff;
 }
-.escondido{
-  display: none;
-}
-
-/* para hacer el parrafo que va justo despues del formulario */
-.form+p, form p{
-  text-align: center;
-}
-
-.sr-only{
+.input-group label {
   position: absolute;
-  left:-10000px;
-  top:auto;
-  height: 1px;
-  width: 1px;
-  overflow: hidden;
+  top: 1rem;
+  left: 0.75rem;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  pointer-events: none;
+  background: transparent;
+  transition: transform 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+}
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+  transform: translateY(-60%) scale(0.85);
+  background: var(--color-card);
+  padding: 0 0.25rem;
+  color: var(--color-primary-dark);               /* label activo en azul oscuro */
+}
+
+/* Botón */
+button[type="submit"] {
+  width: 100%;
+  padding: 0.85rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--color-primary);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+button[type="submit"]:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+button[type="submit"]:active {
+  transform: translateY(1px);
+}
+
+/* Enlaces y texto inferior */
+.form-container p {
+  margin: 1rem 0 0.5rem;
+  text-align: center;
+  color: var(--color-text);
+  font-size: 0.9rem;
+}
+.form-container a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+.form-container a:hover {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+ /* Botón de registro destacado */
+button[type="submit"] {
+  background: #77ff6b;       /* Naranja/rojo suave */
+  color: #ffffff;            /* Texto blanco */
+  border: none;
+  border-radius: 8px;
+  padding: 0.85rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+button[type="submit"]:hover {
+  background: #52ee52;       /* Un poco más oscuro al pasar */
+  transform: translateY(-1px);
+}
+
+button[type="submit"]:active {
+  transform: translateY(1px);
+}
+/* Responsive */
+@media (max-width: 480px) {
+  .form-container form {
+    padding: 2rem 1rem 1.5rem;
+  }
+  .form-container h2 {
+    font-size: 1.6rem;
+  }
+
+
+
 }

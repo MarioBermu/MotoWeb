@@ -7,6 +7,7 @@ import { AuthService, LoginResponse } from '../service/auth.service';
   selector: 'app-login',
   standalone: true,
   imports: [FormsModule],
+  styleUrls: ['./login.component.css'],
   templateUrl: './login.component.html',
 })
 export class LoginComponent {

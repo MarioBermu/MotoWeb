@@ -1,0 +1,46 @@
+<div class="foro-container">
+  <div class="foro-card">
+
+    <!-- Header -->
+    <header class="foro-header">
+      <h1>ForoMotos</h1>
+      <p class="foro-subtitle">Comparte tus rutas, consejos y experiencias</p>
+    </header>
+
+    <!-- Lista de comentarios -->
+    <section class="foro-comments">
+      <div *ngIf="(comments$ | async)?.length === 0" class="no-comments">
+        No hay comentarios aún. ¡Sé el primero!
+      </div>
+      <div *ngFor="let c of comments$ | async" class="comment-card">
+        <div class="comment-meta">
+          <span class="comment-author">{{ c.name }}</span>
+          <span class="comment-date">{{ c.createdAt | date:'short' }}</span>
+        </div>
+        <p class="comment-body">{{ c.message }}</p>
+      </div>
+    </section>
+
+    <!-- Formulario de envío -->
+    <form class="foro-form" *ngIf="authService.isAuthenticated()" (ngSubmit)="publicarMensaje()" #foroForm="ngForm">
+      <textarea
+        name="newmensaje"
+        [(ngModel)]="newmensaje"
+        class="foro-textarea"
+        placeholder="Escribe tu comentario..."
+        rows="4"
+        required
+      ></textarea>
+      <button
+        type="submit"
+        class="foro-button"
+        [disabled]="foroForm.invalid"
+      >
+        Enviar Mensaje
+      </button>
+    </form>
+    <div class="foro-form" *ngIf="!authService.isAuthenticated()">
+      <p>Para participar en el foro, <a routerLink="/login">inicia sesión</a> o <a routerLink="/register">regístrate</a>.</p>
+
+  </div>
+</div>
